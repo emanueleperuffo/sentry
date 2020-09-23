@@ -154,7 +154,11 @@ const StyledBookmarkStar = styled(BookmarkStar)<{bookmarkHasChanged: boolean}>`
   width: 14px;
   height: 14px;
   margin-top: -${space(0.25)}; /* trivial alignment bump */
-  animation: ${p => (p.bookmarkHasChanged ? css`0.5s ${pulse(1.4)}` : 'none')};
+  ${p =>
+    p.bookmarkHasChanged &&
+    css`
+      animation: 0.5s ${pulse(1.4)};
+    `};
 `;
 
 const BadgeWrapper = styled('div')<{isMulti: boolean}>`
@@ -179,13 +183,22 @@ const StyledLink = styled(Link)`
 `;
 
 const BadgeAndActionsWrapper = styled('div')<{bookmarkHasChanged: boolean}>`
-  animation: ${p => (p.bookmarkHasChanged ? css`1s ${alertHighlight('info')}` : 'none')};
+  ${p =>
+    p.bookmarkHasChanged &&
+    css`
+      animation: 1s ${alertHighlight('info')};
+    `};
   z-index: ${p => (p.bookmarkHasChanged ? 1 : 'inherit')};
   position: relative;
   border-style: solid;
   border-width: 1px 0;
   border-color: transparent;
-  :hover ${StyledBookmarkStar}, :hover ${StyledLink} {
-    opacity: 1;
+  :hover {
+    ${StyledBookmarkStar} {
+      opacity: 1;
+    }
+    ${StyledLink} {
+      opacity: 1;
+    }
   }
 `;
